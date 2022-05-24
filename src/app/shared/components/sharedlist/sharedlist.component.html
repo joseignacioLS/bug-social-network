@@ -1,0 +1,34 @@
+<div class="user-control">
+  <div class="user-control__pages">
+    <app-button [text]="'◀'" (clicked)="onPageChange(-1)" [size]="3"></app-button>
+    <span>{{ "Current page: " + currentPage }}</span>
+    <app-button [text]="'▶'" (clicked)="onPageChange(1)" [size]="3"></app-button>
+  </div>
+  <input type="text" [(ngModel)]="filter" />
+</div>
+
+<ul *ngIf="bugData" class="bug-list">
+  <a
+    *ngFor="let bug of bugData | nameFilter: filter | paginator: currentPage"
+    class="bug-list__item"
+    [routerLink]="['/detail', bug._id]"
+  >
+    <div class="image-container">
+      <img class="image" [src]="bug.image" />
+    </div>
+    <div class="data">
+      <p class="name">{{ bug.name }}</p>
+      <div>
+        <p class="user">{{ bug.user }}</p>
+        <p class="date">{{ bug.createdAt }}</p>
+      </div>
+    </div>
+  </a>
+</ul>
+<app-button
+  class="new-message"
+  [text]="'+'"
+  [routerLink]="['/newbug']"
+  [size]="3"
+  [fontSize]="3"
+></app-button>

@@ -1,0 +1,74 @@
+.detail {
+  position: relative;
+  width: 100%;
+}
+
+.detail__image-container {
+  width: 100%;
+  height: 10rem;
+  border: 1px solid black;
+}
+
+.detail__image-container img {
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  margin-left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.detail__image-container input {
+  height: auto;
+  width: 100%;
+}
+
+.detail__data {
+  width: 100%;
+  margin-right: 5rem;
+}
+
+.detail__data .name p,
+.detail__data .name input {
+  font-size: 2rem;
+  width: 100%;
+}
+
+.detail__data .spatiotemporal-data {
+  color: grey;
+  margin-bottom: 1rem;
+}
+
+.detail__data .spatiotemporal-data input {
+  width: 100%;
+}
+
+.detail__data .message {
+  width: 100%;
+}
+
+.button-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.button-container button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=detail.component.css.map */

@@ -1,0 +1,14 @@
+@import "../styles/variables";
+
+.main-container {
+  box-sizing: border-box;
+
+  position: relative;
+  
+  width: 100%;
+  margin-top: calc($header-h + calc(2 * $header-padding));
+  padding: 1rem;
+
+  display: flex;
+  justify-content: center;
+}

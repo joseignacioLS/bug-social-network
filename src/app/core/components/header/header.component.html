@@ -1,0 +1,21 @@
+<header>
+  <div *ngIf="!isMenuVisible" class="links">
+    <a [routerLink]="['/']">Home</a>
+    <a *ngIf="isLogged()" [routerLink]="['/list']">List</a>
+    <a [routerLink]="['/about']">About</a>
+  </div>
+  <div class="user-options">
+    <div *ngIf="!isLogged()" class="user-options__not-logged">
+      <a [routerLink]="['/login']">Login</a>
+    </div>
+    <div *ngIf="isLogged()" class="user-options__logged">
+      <app-button [text]="isMenuVisible? '>': '<'" (clicked)="onToggleMenu()" [size]="2"></app-button>
+      <div class="hidden-menu" [ngStyle]="{
+        'display':isMenuVisible? 'flex': 'none'
+      }">
+        <a [routerLink]="['/mycreations']">My Creations</a>
+        <button (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</header>

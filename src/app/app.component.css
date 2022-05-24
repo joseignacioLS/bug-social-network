@@ -1,0 +1,5 @@
+.main-container {
+  margin-top: calc($header-h + calc(2 * $header-padding));
+  padding: 1rem;
+}
+/*# sourceMappingURL=app.component.css.map */
