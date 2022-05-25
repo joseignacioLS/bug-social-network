@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,aAAa,CAAC;EACZ,aAAa,EAAE,KAAK;EAEpB,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,UAAU;EAE3B,cAAc,EAAE,MAAM;CAKvB;;AAXD,AAQE,aARW,CAQX,CAAC,CAAC;EACA,KAAK,EAAE,GAAG;CACX",
     "sources": [
         "new-bug.component.scss"
     ],

@@ -1,3 +1,4 @@
+import { ExitGuardGuard } from './core/guards/exit-guard.guard';
 import { AuthUserGuard } from './core/guards/auth-user.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -32,6 +33,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/new-bug/new-bug.module').then((m) => m.NewBugModule),
     canActivate: [AuthUserGuard],
+    canDeactivate: [ExitGuardGuard]
   },
   {
     path: 'mycreations',
@@ -48,6 +50,7 @@ const routes: Routes = [
   },
   {
     path: '**',
+    pathMatch: "full",
     redirectTo: '',
   },
 ];

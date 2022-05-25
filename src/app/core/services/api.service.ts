@@ -9,17 +9,16 @@ import { Observable, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient, private userTracker: UserTrackerService) {}
+  constructor(
+    private http: HttpClient,
+    private userTracker: UserTrackerService
+  ) {}
   public getBug(): Observable<IBug[]> {
-    return this.http.get<IBug[]>(
-      `${environment.apiUrl}/bugs`
-    );
+    return this.http.get<IBug[]>(`${environment.apiUrl}/bugs`);
   }
 
   public getBugById(id: string): Observable<IBug> {
-    return this.http.get<IBug>(
-      `${environment.apiUrl}/bugs/${id}`
-    );
+    return this.http.get<IBug>(`${environment.apiUrl}/bugs/${id}`);
   }
 
   public createBug(data: any) {
@@ -29,36 +28,36 @@ export class ApiService {
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const year = today.getFullYear();
 
+    const user = this.userTracker.getUser()?.username;
+
+    const username = user ?? '';
+
     const newBug: INewBug = {
-      user: this.userTracker.getUser(),
+      user: username,
       name: data.name,
       createdAt: `${year}-${month}-${day}`,
       description: data.description,
       image: data.image,
       location: data.location,
-      tags: "",
+      tags: '',
     };
 
-    return this.http.post<IBug>(
-      `${environment.apiUrl}/bugs`,
-      newBug
-    );
+    return this.http.post<IBug>(`${environment.apiUrl}/bugs`, newBug);
   }
 
   public modifyBug(id: string, newData: INewBug) {
     return this.getBugById(id).pipe(
       switchMap((oldData) => {
-        return this.http.put<IBug>(
-          `${environment.apiUrl}/bugs/${id}`,
-          { ...oldData, ...newData, tags:"" }
-        );
+        return this.http.put<IBug>(`${environment.apiUrl}/bugs/${id}`, {
+          ...oldData,
+          ...newData,
+          tags: '',
+        });
       })
     );
   }
 
   public deleteBug(id: string): Observable<IBug> {
-    return this.http.delete<IBug>(
-      `${environment.apiUrl}/bugs/${id}`
-    );
+    return this.http.delete<IBug>(`${environment.apiUrl}/bugs/${id}`);
   }
 }

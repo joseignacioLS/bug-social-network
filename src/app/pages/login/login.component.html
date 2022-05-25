@@ -1,2 +1,10 @@
-<input type="string" [(ngModel)] = "username">
-<button (click)="onLogin()">Login</button>
+<div>
+  <label>Username</label>
+  <input type="string" [(ngModel)]="username" />
+</div>
+<div>
+  <label>Password</label>
+  <input type="password" [(ngModel)]="password" />
+</div>
+<button (click)="onSubmit()">{{mode}}</button>
+<p (click)="onChangeMode()">{{mode === "login"? 'New? Register here' : 'Already have an account? Login here'}}</p>

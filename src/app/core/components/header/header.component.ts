@@ -15,16 +15,15 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public isLogged() {
-    return this.userTracker.getUser() !== '';
+    return this.userTracker.getUser() !== null;
   }
 
   public logout() {
     this.isMenuVisible = false;
-    this.userTracker.setUser('');
+    this.userTracker.logout();
     this.router.navigateByUrl('');
   }
 

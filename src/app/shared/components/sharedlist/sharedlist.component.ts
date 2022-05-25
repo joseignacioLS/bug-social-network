@@ -1,47 +1,36 @@
-import { Router } from '@angular/router';
-import { UserTrackerService } from './../../../core/services/user-tracker.service';
+import { PageLimitService } from './../../../core/services/page-limit.service';
 import { environment } from './../../../../environments/environment';
-import { ApiService } from './../../../core/services/api.service';
 import { IBug } from './../../../core/services/models/api.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sharedlist',
   templateUrl: './sharedlist.component.html',
   styleUrls: ['./sharedlist.component.scss'],
 })
-export class SharedListComponent implements OnInit {
+export class SharedListComponent {
   public bugData?: IBug[];
 
   public currentPage: number = 1;
   public filter: string = '';
+  @Input() public filterByUser: boolean = false;
 
   public defautImg: string = environment.notFoundBug;
 
-  @Input() public filterByUser: boolean = false;
-
-  constructor(
-    private api: ApiService,
-    private userTracker: UserTrackerService,
-    private route: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.api.getBug().subscribe((bugs) => {
-      this.bugData = bugs.filter((b) =>
-        this.filterByUser
-          ? this.userTracker.getUser() !== '' &&
-            b.user === this.userTracker.getUser()
-          : true
-      );
-    });
-  }
+  constructor(private pageLimitService: PageLimitService) {}
 
   public onPageChange(deltaPage: number): void {
-    if (this.currentPage + deltaPage <= 0) {
+    if (
+      this.currentPage + deltaPage <= 0 ||
+      this.currentPage + deltaPage > this.pageLimitService.pageLimit
+    ) {
       return;
     }
 
     this.currentPage += deltaPage;
+  }
+
+  public onFilterUpdate(newFilter: string) {
+    this.filter = newFilter;
   }
 }

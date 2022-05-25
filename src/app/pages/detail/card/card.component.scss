@@ -1,0 +1,32 @@
+.detail {
+  width: 75vw;
+  position: relative;
+
+  &__image-container {
+    width: 100%;
+
+    img {
+      display: block;
+      max-height: 100%;
+      max-width: 100%;
+      margin: auto;
+    }
+  }
+
+  &__data {
+    width: 100%;
+
+    .name {
+      font-size: 2rem;
+      text-decoration: underline;
+    }
+    .user {
+      font-size: 1rem;
+      color: grey;
+    }
+    .spatiotemporal-data {
+      color: grey;
+      margin-bottom: 1rem;
+    }
+  }
+}

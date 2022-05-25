@@ -1,0 +1,57 @@
+<form *ngIf="newBugForm" [formGroup]="newBugForm" (submit)="onSubmit()">
+  <div class="form-section">
+    <label>Name:</label>
+    <input
+      placeholder="Name"
+      type="text"
+      formControlName="name"
+      [maxLength]="32"
+    />
+    <p *ngIf="!newBugForm.get('name')?.valid && newBugForm.get('name')?.dirty">
+      Required
+    </p>
+  </div>
+  <div class="form-section">
+    <label>Description:</label>
+    <textarea
+      placeholder="Description"
+      formControlName="description"
+      [maxLength]="256"
+    ></textarea>
+    <p
+      *ngIf="
+        !newBugForm.get('description')?.valid &&
+        newBugForm.get('description')?.dirty
+      "
+    >
+      Required
+    </p>
+  </div>
+  <div class="form-section">
+    <label>Image (url):</label>
+    <input placeholder="Image URL" formControlName="image" />
+    <p
+      *ngIf="!newBugForm.get('image')?.valid && newBugForm.get('image')?.dirty"
+    >
+      Not valid field
+    </p>
+  </div>
+  <div class="form-section">
+    <label>Location:</label>
+    <input placeholder="Location" formControlName="location" />
+    <p
+      *ngIf="
+        !newBugForm.get('location')?.valid && newBugForm.get('location')?.dirty
+      "
+    >
+      Not valid field
+    </p>
+  </div>
+</form>
+<app-button
+  (clicked)="onSubmit()"
+  [isDisabled]="!newBugForm.valid"
+  [text]="'✔'"
+  [size]="2"
+  [fontSize]="1"
+></app-button>

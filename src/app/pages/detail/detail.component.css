@@ -1,21 +1,16 @@
 .detail {
-  position: relative;
   width: 100%;
 }
 
 .detail__image-container {
   width: 100%;
-  height: 10rem;
-  border: 1px solid black;
 }
 
 .detail__image-container img {
-  height: 100%;
+  display: block;
+  max-height: 100%;
   max-width: 100%;
-  overflow: hidden;
-  margin-left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  margin: auto;
 }
 
 .detail__image-container input {
@@ -28,8 +23,11 @@
   margin-right: 5rem;
 }
 
-.detail__data .name p,
-.detail__data .name input {
+.detail__data .name {
+  width: 100%;
+}
+
+.detail__data .name p {
   font-size: 2rem;
   width: 100%;
 }
@@ -64,11 +62,5 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.button-container button {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
 }
 /*# sourceMappingURL=detail.component.css.map */

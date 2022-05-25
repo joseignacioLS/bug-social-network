@@ -1,0 +1,16 @@
+<div class="user-control">
+  <div class="user-control__pages">
+    <app-button
+      [text]="'◀'"
+      (clicked)="onClick(-1)"
+      [size]="3"
+    ></app-button>
+    <span>{{ "Page " + currentPage }}</span>
+    <app-button
+      [text]="'▶'"
+      (clicked)="onClick(1)"
+      [size]="3"
+    ></app-button>
+  </div>
+  <input type="text" [(ngModel)]="filter" (input)="onInput()"/>
+</div>

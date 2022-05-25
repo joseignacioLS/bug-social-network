@@ -10,14 +10,27 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   public username: string = "";
+  public password: string = "";
+  public mode: string = "login"
   constructor(private router: Router, private userTracker: UserTrackerService) { }
 
   ngOnInit(): void {
   }
 
-  public onLogin(): void {
-    this.userTracker.setUser(this.username);
-    this.router.navigateByUrl("/list");
+  public onSubmit(): void {
+    if (this.mode === "login") {
+      this.userTracker.login(this.username, this.password);
+    }
+
+    if (this.mode === "register") {
+      this.userTracker.register(this.username, this.password)
+    }
+    // this.userTracker.setUser(this.username);
+    // this.router.navigateByUrl("/list");
+  }
+
+  public onChangeMode(): void {
+    this.mode = this.mode === "login"? "register": "login";
   }
 
 }

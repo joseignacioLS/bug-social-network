@@ -1,0 +1,61 @@
+@import "src/styles/variables";
+
+.bug-list__item {
+  position: relative;
+
+  height: 5rem;
+  width: 70vw;
+
+  list-style: none;
+  margin-bottom: 0.25rem;
+
+  padding: 0.5rem;
+  border-radius: 1rem;
+
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 1rem;
+
+  background-color: $main-color;
+
+  text-decoration: none;
+  color: black;
+
+  .image-container {
+    height: 5rem;
+    width: 5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    border-radius: 0.5rem;
+
+    .image {
+      height: 5rem;
+    }
+  }
+
+  .data {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    font-size: 0.8rem;
+    .name {
+      font-size: 1.2rem;
+      text-transform: capitalize;
+    }
+  }
+  .user-item {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: block;
+  }
+}

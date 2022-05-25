@@ -1,3 +1,4 @@
+import { UserTrackerService } from './../../core/services/user-tracker.service';
 import { map, Observable, switchMap } from 'rxjs';
 import { IBug } from './../../core/services/models/api.model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -18,24 +19,28 @@ export class DetailComponent implements OnInit {
 
   public editBugForm: FormGroup;
 
-  public user: string = 'jose';
+  public canEdit: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private userTracker: UserTrackerService
   ) {
     this.editBugForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       location: ['', []],
-      image: ['', []]
+      image: ['', []],
     });
   }
 
   ngOnInit(): void {
     this.updatePageInfo();
+    this.bug?.subscribe((bug : IBug) => {
+      this.canEdit = bug.user === this.userTracker.getUser()?.username
+    })
   }
 
   public updatePageInfo() {
@@ -49,7 +54,7 @@ export class DetailComponent implements OnInit {
           name: bug.name,
           description: bug.description,
           location: bug.location,
-          image: bug.image
+          image: bug.image,
         });
         return bug;
       })
@@ -60,14 +65,6 @@ export class DetailComponent implements OnInit {
     this.edit = !this.edit;
   }
 
-  public onEdit(): void {
-    if (this.bug && this.editBugForm?.valid) {
-      this.api.modifyBug(this.id, this.editBugForm.value).subscribe((e) => {
-        this.edit = false;
-        this.updatePageInfo();
-      });
-    }
-  }
   public onDelete(): void {
     if (this.bug) {
       this.api.deleteBug(this.id).subscribe((e) => {

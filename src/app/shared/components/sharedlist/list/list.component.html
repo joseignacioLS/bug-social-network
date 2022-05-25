@@ -1,0 +1,6 @@
+<section *ngIf="bugData" class="bug-list">
+  <app-item
+    *ngFor="let bug of bugData | nameFilter: filter | paginator: currentPage"
+    [bug]="bug"
+  ></app-item>
+</section>

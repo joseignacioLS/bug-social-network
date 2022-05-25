@@ -1,0 +1,70 @@
+.bug-list__item {
+  height: 5rem;
+  list-style: none;
+  margin-bottom: .25rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: bisque;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+.bug-list__item .image-container {
+  height: 5rem;
+  width: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+}
+
+.bug-list__item .image-container .image {
+  height: 5rem;
+}
+
+.bug-list__item .data {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: 0.8rem;
+}
+
+.bug-list__item .data .name {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+.owned {
+  background-color: coral;
+}
+/*# sourceMappingURL=item.component.css.map */

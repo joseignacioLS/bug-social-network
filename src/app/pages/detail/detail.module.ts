@@ -1,3 +1,4 @@
+import { ButtonModule } from './../../shared/components/button/button.module';
 import { SharedModule } from './../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -5,17 +6,20 @@ import { CommonModule } from '@angular/common';
 
 import { DetailRoutingModule } from './detail-routing.module';
 import { DetailComponent } from './detail.component';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
   declarations: [
-    DetailComponent
+    DetailComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
     DetailRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    ButtonModule
   ]
 })
 export class DetailModule { }
