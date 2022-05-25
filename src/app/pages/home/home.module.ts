@@ -4,11 +4,17 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { WhatIsComponent } from './what-is/what-is.component';
+import { JoinComponent } from './join/join.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    WhatIsComponent,
+    JoinComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,5 @@
 @import "src/styles/variables";
+@import "src/styles/mixins";
 
 .bug-list__item {
   position: relative;
@@ -7,10 +8,9 @@
   width: 70vw;
 
   list-style: none;
-  margin-bottom: 0.25rem;
 
   padding: 0.5rem;
-  border-radius: 1rem;
+  border-radius: $default-border-radius;
 
 
   display: flex;
@@ -24,6 +24,10 @@
   text-decoration: none;
   color: black;
 
+  @include not-mobile {
+    width: 14rem;
+  }
+
   .image-container {
     height: 5rem;
     width: 5rem;
@@ -33,7 +37,7 @@
     align-items: center;
 
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: $default-border-radius;
 
     .image {
       height: 5rem;
@@ -50,6 +54,7 @@
     .name {
       font-size: 1.2rem;
       text-transform: capitalize;
+      text-decoration: underline;
     }
   }
   .user-item {
@@ -57,5 +62,8 @@
     top: 1rem;
     right: 1rem;
     display: block;
+  }
+
+  &--owned {
   }
 }

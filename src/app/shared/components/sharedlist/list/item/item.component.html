@@ -1,13 +1,20 @@
-<a [routerLink]="['/detail', bug._id]" *ngIf="bug" class="bug-list__item">
+<a
+  [routerLink]="['/detail', bug._id]"
+  *ngIf="bug"
+  class="bug-list__item"
+  [ngClass]="{ 'bug-list__item--owned': isOwned }"
+>
   <div class="image-container">
     <img class="image" [src]="bug.image" />
   </div>
   <div class="data">
-    <p class="name">{{ bug.name }}</p>
+    <p class="name" [ngStyle]="{ 'font-weight': isOwned ? 'bold' : '' }">
+      {{ bug.name }}
+    </p>
     <div>
       <p class="user">{{ bug.user }}</p>
       <p class="date">{{ bug.createdAt }}</p>
     </div>
   </div>
-  <p class="user-item">{{isOwned?"🐞":""}}</p>
+  <!-- <p class="user-item">{{ isOwned ? "⭐" : "" }}</p> -->
 </a>
