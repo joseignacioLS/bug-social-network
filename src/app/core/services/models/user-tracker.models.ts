@@ -1,7 +1,11 @@
 export interface IUserResponse {
   message: string;
   status: string;
-  data?: any;
+  data: {
+    id?: string
+    username?: string
+    token?: string
+  };
 }
 
 export interface IUser {

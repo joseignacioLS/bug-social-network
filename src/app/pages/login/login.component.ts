@@ -44,12 +44,13 @@ export class LoginComponent {
     if (this.userForm.valid) {
       this.setErrorMessage('');
       const { username, password } = this.userForm.value;
+
       if (this.mode === 'login') {
         this.onLogin(username, password);
       }
 
       if (this.mode === 'register') {
-        this.onRegister(username, password)
+        this.onRegister(username, password);
       }
     }
   }

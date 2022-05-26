@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DetailFilterService } from './../../../core/services/detail-filter.service';
 import { PageLimitService } from './../../../core/services/page-limit.service';
 import { environment } from './../../../../environments/environment';
@@ -22,7 +23,8 @@ export class SharedListComponent implements OnInit {
 
   constructor(
     private detailFilterService: DetailFilterService,
-    private pageLimitService: PageLimitService
+    private pageLimitService: PageLimitService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,5 +47,7 @@ export class SharedListComponent implements OnInit {
 
   public onFilterUpdate(newFilter: string) {
     this.filter = newFilter;
+    this.detailFilterService.setFilter(newFilter);
+    this.router.navigate(['/list']);
   }
 }

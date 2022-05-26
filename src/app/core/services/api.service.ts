@@ -36,7 +36,7 @@ export class ApiService {
    * @param data bug data
    * @returns the generated bug object
    */
-  public createBug(data: any) {
+  public createBug(data: INewBug) {
     // sacar todo esto a otra funcion
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
@@ -48,13 +48,9 @@ export class ApiService {
     const username = user ?? '';
 
     const newBug: INewBug = {
+      ...data,
       user: username,
-      name: data.name,
       createdAt: `${year}-${month}-${day}`,
-      description: data.description,
-      image: data.image,
-      location: data.location,
-      tags: data.tags,
     };
 
     return this.http.post<IBug>(`${environment.apiUrl}/bugs`, newBug);

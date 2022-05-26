@@ -1,4 +1,9 @@
-<app-card *ngIf="bug | async as bug" [bug]="bug" [edit]="edit" (stopEdittingEmitter)="onStopEditting()"></app-card>
+<app-card
+  *ngIf="bug | async as bug"
+  [bug]="bug"
+  [edit]="edit"
+  (stopEdittingEmitter)="onStopEditting()"
+></app-card>
 <div class="button-container" *ngIf="canEdit">
   <app-button
     *ngIf="edit"

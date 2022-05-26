@@ -29,6 +29,8 @@ button {
 }
 
 .tag-list {
+  display:flex;
+  flex-wrap: wrap;
   &__item {
     margin: 0 0.1rem;
     padding: 0.25rem;

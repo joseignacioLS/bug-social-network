@@ -25,7 +25,7 @@ export class BugFormComponent implements OnInit {
       description: ['', [Validators.required, Validators.maxLength(256)]],
       image: [''],
       location: [''],
-      tags: ['', [Validators.pattern(/^[A-Za-z\-]{3,12}(?:,[A-Za-z\-]{3,12})?$/)]],
+      tags: ['', [Validators.pattern(/^[A-Za-z\-]{3,12}(?:,[A-Za-z\-]{3,12})*$/)]],
     });
   }
 

@@ -4,7 +4,7 @@
 .bug-list__item {
   position: relative;
 
-  height: 6rem;
+  height: 7rem;
   width: 16rem;
 
   list-style: none;
@@ -29,8 +29,9 @@
   }
 
   .image-container {
+    flex-shrink: 0;
     height: 100%;
-    width: 5rem;
+    width: 6rem;
 
     display: flex;
     justify-content: center;
@@ -45,7 +46,7 @@
     .image {
       object-fit: cover;
       max-width: 300%;
-      max-height: 200%;
+      max-height: 300%;
 
       &:hover {
         transition: 500ms;
@@ -66,11 +67,5 @@
       text-transform: capitalize;
       text-decoration: underline;
     }
-  }
-  .user-item {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: block;
   }
 }

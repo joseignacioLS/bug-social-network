@@ -22,7 +22,6 @@ export class ListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     this.api.getBug().subscribe((bugs: IBug[]) => {
       this.bugData = bugs
         .reverse()
@@ -33,7 +32,6 @@ export class ListComponent implements OnInit {
             : true
         );
     });
-
   }
 
   public onFilterReceive(filter: string) {
