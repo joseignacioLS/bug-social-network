@@ -5,7 +5,7 @@
   position: relative;
 
   height: 5rem;
-  width: 70vw;
+  width: 14rem;
 
   list-style: none;
 
@@ -25,12 +25,13 @@
   color: black;
 
   @include not-mobile {
-    width: 14rem;
+    width: 20rem;
+    height: 10rem;
   }
 
   .image-container {
-    height: 5rem;
-    width: 5rem;
+    height: 100%;
+    width:5rem;
 
     display: flex;
     justify-content: center;
@@ -39,8 +40,11 @@
     overflow: hidden;
     border-radius: $default-border-radius;
 
+    @include not-mobile{
+      width: 50%;
+    }
     .image {
-      height: 5rem;
+      height: 100%;
     }
   }
 

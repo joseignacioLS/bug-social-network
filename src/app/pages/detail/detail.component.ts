@@ -3,7 +3,7 @@ import { map, Observable, switchMap } from 'rxjs';
 import { IBug } from './../../core/services/models/api.model';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ApiService } from './../../core/services/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -71,5 +71,10 @@ export class DetailComponent implements OnInit {
         this.router.navigateByUrl('/mycreations');
       });
     }
+  }
+
+  public onStopEditting() {
+    this.updatePageInfo()
+    this.edit = false
   }
 }

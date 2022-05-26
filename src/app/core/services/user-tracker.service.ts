@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
-import { environment } from './../../../environments/environment.prod';
+import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 
 interface IUserResponse {
   message: string;
@@ -11,9 +11,9 @@ interface IUserResponse {
 }
 
 interface IUser {
-  _id:string
-  username: string
-  token: string
+  _id: string;
+  username: string;
+  token: string;
 }
 
 @Injectable({
@@ -25,39 +25,46 @@ export class UserTrackerService {
   constructor(private http: HttpClient, private router: Router) {}
 
   public getUser(): IUser | null {
-    const item: string | null = localStorage.getItem('user')
-    if (item !== null) return JSON.parse(item) as IUser
-    return item
+    const item: string | null = localStorage.getItem('user');
+    if (item !== null) return JSON.parse(item) as IUser;
+    return item;
   }
 
   public isLogged(): boolean {
     return this.getUser() !== null;
   }
 
-  public login(username: string, password: string): void {
-    this.http
+  public login(username: string, password: string): Observable<IUserResponse> {
+    return this.http
       .post<IUserResponse>(`${environment.apiUrl}/user/login`, {
         username,
         password,
       })
-      .subscribe((res) => {
-        localStorage.setItem('user', JSON.stringify(res.data));
-        this.router.navigate(["/list"])
-      });
+      .pipe(
+        tap((res) => {
+          localStorage.setItem('user', JSON.stringify(res.data));
+          this.router.navigate(['/list']);
+        })
+      );
   }
 
-  public register(username: string, password: string): void {
-    this.http
+  public register(
+    username: string,
+    password: string
+  ): Observable<IUserResponse> {
+    return this.http
       .post<IUserResponse>(`${environment.apiUrl}/user/register`, {
         username,
         password,
       })
-      .subscribe((res) => {
-        this.router.navigate(["/login"])
-      });
+      .pipe(
+        tap(() => {
+          this.router.navigate(['/login']);
+        })
+      );
   }
 
-  public logout():void {
-    localStorage.removeItem("user");
+  public logout(): void {
+    localStorage.removeItem('user');
   }
 }

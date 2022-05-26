@@ -2,7 +2,7 @@ import { INewBug, IBug } from './../../../core/services/models/api.model';
 import { Router } from '@angular/router';
 import { ApiService } from './../../../core/services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-bug-form',
@@ -13,6 +13,7 @@ export class BugFormComponent implements OnInit {
   public newBugForm: FormGroup;
   @Input() public mode: string = 'create';
   @Input() public bug?: IBug;
+  @Output() public editEmitter: EventEmitter<void> = new EventEmitter();
 
   constructor(
     private api: ApiService,
@@ -48,9 +49,11 @@ export class BugFormComponent implements OnInit {
         });
       } else if (this.mode === 'edit' && this.bug) {
         this.api.modifyBug(this.bug._id, data).subscribe((e) => {
-          window.location.reload();
+          this.editEmitter.emit()
         });
       }
     }
   }
 }
+//https://bag-of-bugs.netlify.app/detail/628d1173ee4211905b9725f3
+

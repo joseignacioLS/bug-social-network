@@ -22,5 +22,5 @@
       <p>{{ "Description: " + bug.description }}</p>
     </div>
   </div>
-  <app-bug-form *ngIf="edit" [mode]="'edit'" [bug]="bug"></app-bug-form>
+  <app-bug-form *ngIf="edit" [mode]="'edit'" [bug]="bug" (editEmitter)="onStopEditting()"></app-bug-form>
 </div>

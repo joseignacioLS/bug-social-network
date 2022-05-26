@@ -1,5 +1,5 @@
 import { IBug } from './../../../core/services/models/api.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -9,7 +9,12 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardComponent implements OnInit {
   @Input() public bug?: IBug;
   @Input() public edit: boolean = false;
+  @Output() public stopEdittingEmitter: EventEmitter<void> = new EventEmitter()
   constructor() {}
 
   ngOnInit(): void {}
+
+  public onStopEditting() {
+    this.stopEdittingEmitter.emit()
+  }
 }

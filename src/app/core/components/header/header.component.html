@@ -1,9 +1,9 @@
 <header>
-  <a [routerLink]="['/']" class="title">Bag of Bugs</a>
+  <a [routerLink]="['/list']" class="title">Bag of Bugs</a>
   <div class="header">
     <!-- Navigation links -->
     <div *ngIf="!isMenuVisible" class="links">
-      <a *ngIf="isLogged()" [routerLink]="['/list']">List</a>
+      <a [routerLink]="['/']">Home</a>
       <a [routerLink]="['/about']">About</a>
     </div>
 
@@ -26,7 +26,7 @@
           }"
         >
           <a [routerLink]="['/mycreations']">My Creations</a>
-          <button (click)="logout()">Logout</button>
+          <button (click)="logout()" class="logout">Logout</button>
         </div>
       </div>
     </div>

@@ -1,21 +1,19 @@
 import { Router } from '@angular/router';
 import { UserTrackerService } from './../../services/user-tracker.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public isMenuVisible: boolean = false;
 
   constructor(
     private userTracker: UserTrackerService,
     private router: Router
   ) {}
-
-  ngOnInit(): void {}
 
   public isLogged() {
     return this.userTracker.getUser() !== null;

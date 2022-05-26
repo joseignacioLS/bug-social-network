@@ -1,11 +1,5 @@
 <app-user-controls [currentPage]="currentPage" (clickEmmitter)="onPageChange($event)" (filterEmmiter)="onFilterUpdate($event)"></app-user-controls>
 <app-list [bugData]="bugData" [filter]="filter" [currentPage]="currentPage" [filterByUser]="filterByUser"></app-list>
-<!-- <section *ngIf="bugData" class="bug-list">
-  <app-item
-    *ngFor="let bug of bugData | nameFilter: filter | paginator: currentPage"
-    [bug]="bug"
-  ></app-item>
-</section> -->
 
 <app-button
   class="new-bug"

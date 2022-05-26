@@ -7,11 +7,22 @@
       [placeholder]="'4-12 characters'"
     />
     <p
+      class="form-error"
       *ngIf="
-        userForm.get('username')?.dirty && !userForm.get('username')?.valid
+        userForm.get('username')?.dirty &&
+        userForm.get('username')?.hasError('required')
       "
     >
       Required field
+    </p>
+    <p
+      class="form-error"
+      *ngIf="
+        userForm.get('username')?.dirty &&
+        userForm.get('username')?.hasError('minlength')
+      "
+    >
+      Too short
     </p>
   </div>
   <div>
@@ -22,14 +33,26 @@
       [placeholder]="'4-12 characters'"
     />
     <p
+      class="form-error"
       *ngIf="
-        userForm.get('password')?.dirty && !userForm.get('password')?.valid
+        userForm.get('password')?.dirty &&
+        userForm.get('password')?.hasError('required')
       "
     >
       Required field
     </p>
+    <p
+      class="form-error"
+      *ngIf="
+        userForm.get('password')?.dirty &&
+        userForm.get('password')?.hasError('minlength')
+      "
+    >
+      Too short
+    </p>
   </div>
   <button (click)="onSubmit()" [disabled]="!userForm.valid">{{ mode }}</button>
+  <p class="form-error">{{errorMessage}}</p>
 </form>
 <p>
   {{ mode === "login" ? "New? " : "Already have an account? "

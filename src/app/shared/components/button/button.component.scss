@@ -9,4 +9,8 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:active {
+    background-color: $terciary-color;
+  }
 }
