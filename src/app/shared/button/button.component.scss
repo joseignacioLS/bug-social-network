@@ -1,6 +1,6 @@
 @import "src/styles/variables";
 
-button {
+.round-button {
   border-radius: 50%;
   background-color: $secondary-color;
   color: white;
@@ -10,7 +10,10 @@ button {
   justify-content: center;
   align-items: center;
 
-  &:active {
+  &:active:enabled {
     background-color: $terciary-color;
+  }
+  &:disabled {
+    opacity: .5;
   }
 }

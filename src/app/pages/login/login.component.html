@@ -5,6 +5,7 @@
       type="string"
       formControlName="username"
       [placeholder]="'4-12 characters'"
+      [maxlength]="12"
     />
     <p
       class="form-error"
@@ -31,6 +32,7 @@
       type="password"
       formControlName="password"
       [placeholder]="'4-12 characters'"
+      [maxlength]="12"
     />
     <p
       class="form-error"
@@ -52,7 +54,7 @@
     </p>
   </div>
   <button (click)="onSubmit()" [disabled]="!userForm.valid">{{ mode }}</button>
-  <p class="form-error">{{errorMessage}}</p>
+  <p class="form-error">{{ errorMessage }}</p>
 </form>
 <p>
   {{ mode === "login" ? "New? " : "Already have an account? "

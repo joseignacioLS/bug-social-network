@@ -10,7 +10,9 @@ ul,
 li,
 input,
 textarea,
-button {
+button,
+div,
+strong {
   font-family: "Petrona", serif;
   font-size: 1rem;
 }
@@ -18,4 +20,29 @@ button {
 * {
   margin: 0;
   padding: 0;
+}
+
+// GLOBALS
+
+button {
+  cursor: pointer;
+}
+
+.tag-list {
+  &__item {
+    margin: 0 0.1rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    background-color: $terciary-color;
+    color: white;
+
+    cursor: pointer;
+  }
+}
+
+
+.new-bug {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
 }

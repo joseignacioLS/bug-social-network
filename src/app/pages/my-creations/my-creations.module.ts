@@ -1,3 +1,4 @@
+import { ButtonModule } from './../../shared/button/button.module';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +14,8 @@ import { MyCreationsComponent } from './my-creations.component';
   imports: [
     CommonModule,
     MyCreationsRoutingModule,
-    SharedModule
+    SharedModule,
+    ButtonModule
   ]
 })
 export class MyCreationsModule { }

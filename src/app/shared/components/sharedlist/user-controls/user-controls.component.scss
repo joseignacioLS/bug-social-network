@@ -19,4 +19,9 @@
       border-radius: 50%;
     }
   }
+
+  &__filter {
+    display:flex;
+    gap:.5rem;
+  }
 }

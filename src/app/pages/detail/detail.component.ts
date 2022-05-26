@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent implements OnInit {
+
+
   public bug?: Observable<IBug>;
   private id: string = '0';
 
@@ -55,6 +57,7 @@ export class DetailComponent implements OnInit {
           description: bug.description,
           location: bug.location,
           image: bug.image,
+          tags: bug.tags
         });
         return bug;
       })

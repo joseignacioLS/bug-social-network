@@ -1,10 +1,15 @@
-<app-user-controls [currentPage]="currentPage" (clickEmmitter)="onPageChange($event)" (filterEmmiter)="onFilterUpdate($event)"></app-user-controls>
-<app-list [bugData]="bugData" [filter]="filter" [currentPage]="currentPage" [filterByUser]="filterByUser"></app-list>
+<app-user-controls
+  [currentPage]="currentPage"
+  [maxPage]="maxPage"
+  (clickEmmitter)="onPageChange($event)"
+  (filterEmmiter)="onFilterUpdate($event)"
+  [filter]="filter"
+></app-user-controls>
 
-<app-button
-  class="new-bug"
-  [text]="'+'"
-  [routerLink]="['/newbug']"
-  [size]="3"
-  [fontSize]="3"
-></app-button>
+<app-list
+  [bugData]="bugData"
+  [filter]="filter"
+  [currentPage]="currentPage"
+  [filterByUser]="filterByUser"
+  (filterEmitter)="onFilterUpdate($event)"
+></app-list>

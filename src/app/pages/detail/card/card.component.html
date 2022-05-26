@@ -19,8 +19,27 @@
         <p class="spatiotemporal-data__date">{{ "Date: " + bug.createdAt }}</p>
       </div>
 
-      <p>{{ "Description: " + bug.description }}</p>
+      <p>
+        <strong>{{ "Description: " }}</strong>
+      </p>
+      <p>{{ bug.description }}</p>
+      <div *ngIf="bug.tags" class="tag-list">
+        <p>
+          <strong>{{ "Tags: " }}</strong>
+        </p>
+        <span
+          class="tag-list__item"
+          *ngFor="let tag of bug.tags?.split(',')"
+          (click)="onClickTag(tag)"
+          >{{ tag }}</span
+        >
+      </div>
     </div>
   </div>
-  <app-bug-form *ngIf="edit" [mode]="'edit'" [bug]="bug" (editEmitter)="onStopEditting()"></app-bug-form>
+  <app-bug-form
+    *ngIf="edit"
+    [mode]="'edit'"
+    [bug]="bug"
+    (editEmitter)="onStopEditting()"
+  ></app-bug-form>
 </div>

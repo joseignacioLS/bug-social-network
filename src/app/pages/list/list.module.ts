@@ -1,3 +1,4 @@
+import { ButtonModule } from './../../shared/button/button.module';
 import { SharedModule } from './../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,8 @@ import { ListComponent } from './list.component';
     CommonModule,
     ListRoutingModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ButtonModule
   ]
 })
 export class ListModule { }

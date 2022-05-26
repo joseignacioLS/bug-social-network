@@ -25,6 +25,7 @@ export class BugFormComponent implements OnInit {
       description: ['', [Validators.required, Validators.maxLength(256)]],
       image: [''],
       location: [''],
+      tags: ['', [Validators.pattern(/^[A-Za-z\-]{3,12}(?:,[A-Za-z\-]{3,12})?$/)]],
     });
   }
 
@@ -34,7 +35,8 @@ export class BugFormComponent implements OnInit {
         name: this.bug.name,
         description: this.bug.description,
         image: this.bug.image,
-        location: this.bug.location
+        location: this.bug.location,
+        tags: this.bug.tags
       });
 
     }
@@ -55,5 +57,4 @@ export class BugFormComponent implements OnInit {
     }
   }
 }
-//https://bag-of-bugs.netlify.app/detail/628d1173ee4211905b9725f3
 

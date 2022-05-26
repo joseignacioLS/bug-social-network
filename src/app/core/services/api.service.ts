@@ -13,14 +13,29 @@ export class ApiService {
     private http: HttpClient,
     private userTracker: UserTrackerService
   ) {}
+
+  /**
+   * Makes a get call to the api to obtain all the bug objects
+   * @returns an array with all the bug objects in the DB
+   */
   public getBug(): Observable<IBug[]> {
     return this.http.get<IBug[]>(`${environment.apiUrl}/bugs`);
   }
 
+  /**
+   * Makes a get call to the api to obtain a bug object with the provided id
+   * @param id id of the desired object. Format string
+   * @returns the bug object with the indicated id
+   */
   public getBugById(id: string): Observable<IBug> {
     return this.http.get<IBug>(`${environment.apiUrl}/bugs/${id}`);
   }
 
+  /**
+   * Makes a post call to the api to generate a new bug object
+   * @param data bug data
+   * @returns the generated bug object
+   */
   public createBug(data: any) {
     // sacar todo esto a otra funcion
     const today = new Date();
@@ -39,24 +54,35 @@ export class ApiService {
       description: data.description,
       image: data.image,
       location: data.location,
-      tags: '',
+      tags: data.tags,
     };
 
     return this.http.post<IBug>(`${environment.apiUrl}/bugs`, newBug);
   }
+
+  /**
+   * Makes a put call to the api to modify the bug object with the provided id
+   * @param id the id of the bug object to modify. Format string
+   * @param newData the data to overwrite the old object data
+   * @returns the modified bug object
+   */
 
   public modifyBug(id: string, newData: INewBug) {
     return this.getBugById(id).pipe(
       switchMap((oldData) => {
         return this.http.put<IBug>(`${environment.apiUrl}/bugs/${id}`, {
           ...oldData,
-          ...newData,
-          tags: '',
+          ...newData
         });
       })
     );
   }
 
+  /**
+   * Makes a delete call to delete the object with the provided id
+   * @param id the id of the bug to modify. Format string
+   * @returns the delete object
+   */
   public deleteBug(id: string): Observable<IBug> {
     return this.http.delete<IBug>(`${environment.apiUrl}/bugs/${id}`);
   }

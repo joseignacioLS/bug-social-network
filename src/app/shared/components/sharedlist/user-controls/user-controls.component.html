@@ -1,16 +1,21 @@
 <div class="user-control">
   <div class="user-control__pages">
     <app-button
+    [isDisabled]="currentPage <= 1"
       [text]="'<'"
       (clicked)="onClick(-1)"
       [size]="2"
     ></app-button>
     <span>{{ "Page " + currentPage }}</span>
     <app-button
+    [isDisabled]="currentPage >= maxPage"
       [text]="'>'"
       (clicked)="onClick(1)"
       [size]="2"
     ></app-button>
   </div>
-  <input type="text" [(ngModel)]="filter" (input)="onInput()" [placeholder]="'Write your filter'"/>
+  <div class="user-control__filter">
+    <input type="text" [(ngModel)]="filter" (input)="onInput()" [placeholder]="'Write your filter'"/>
+    <app-button [isDisabled]="filter === ''" [fontSize]="1" [text]="'X'" (clicked)="onResetFilter()" [size]="1.5"></app-button>
+  </div>
 </div>

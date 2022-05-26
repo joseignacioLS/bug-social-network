@@ -47,6 +47,17 @@
       Not valid field
     </p>
   </div>
+  <div class="form-section">
+    <label>Tags:</label>
+    <input [maxlength]="38" placeholder="Tag1,Tag2,Tag3..." formControlName="tags" />
+    <p
+      *ngIf="
+        !newBugForm.get('tags')?.valid && newBugForm.get('tags')?.dirty
+      "
+    >
+      Not valid tags. Use the format: "tag1,tag2,tag3" as in "spider,web,bug". Each tag must have 3-12 characters
+    </p>
+  </div>
 </form>
 <app-button
   (clicked)="onSubmit()"

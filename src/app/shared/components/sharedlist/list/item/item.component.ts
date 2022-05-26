@@ -2,7 +2,7 @@ import { environment } from './../../../../../../environments/environment';
 import { UserTrackerService } from './../../../../../core/services/user-tracker.service';
 import { IBug } from './../../../../../core/services/models/api.model';
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-item',
@@ -11,6 +11,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ItemComponent implements OnInit {
   @Input() public bug?: IBug;
+  @Output() public filterEmitter: EventEmitter<string> = new EventEmitter();
   public isOwned: boolean = false;
 
   constructor(
@@ -25,5 +26,9 @@ export class ItemComponent implements OnInit {
     if (this.userTracker.getUser()?.username === this.bug?.user) {
       this.isOwned = true;
     }
+  }
+
+  public onFilterClick(filter: string) {
+    this.filterEmitter.emit(filter);
   }
 }

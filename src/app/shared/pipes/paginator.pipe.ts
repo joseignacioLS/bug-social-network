@@ -9,9 +9,10 @@ const ITEMS_PER_PAGE: number = 6;
 })
 export class PaginatorPipe implements PipeTransform {
   constructor(private pageLimitService: PageLimitService) {}
+
   transform(data: IBug[], currentPage: number): IBug[] {
     const maxPage: number = Math.floor((data.length - 1) / ITEMS_PER_PAGE) + 1;
-    this.pageLimitService.setLimit(maxPage);
+    this.pageLimitService.setMaxPage(maxPage);
 
     const page: IBug[] = data.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,

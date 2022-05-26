@@ -6,11 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NameFilterPipe implements PipeTransform {
   transform(data: IBug[], filter: string): IBug[] {
-    if (filter === '') return data.reverse();
-    return data
-      .reverse()
-      .filter((bug) =>
-        bug.name.toLowerCase().includes(filter.toLocaleLowerCase())
-      );
+    if (filter === '') return data;
+    return data.filter(
+      (bug) =>
+        bug.name.toLowerCase().includes(filter.toLowerCase()) ||
+        bug.tags?.toLowerCase().includes(filter.toLowerCase())
+    );
   }
 }

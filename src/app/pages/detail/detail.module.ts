@@ -1,4 +1,4 @@
-import { ButtonModule } from './../../shared/components/button/button.module';
+import { ButtonModule } from './../../shared/button/button.module';
 import { SharedModule } from './../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';

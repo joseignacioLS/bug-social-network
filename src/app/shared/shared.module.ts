@@ -1,4 +1,5 @@
-import { ButtonModule } from './components/button/button.module';
+import { ButtonModule } from './button/button.module';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';

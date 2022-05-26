@@ -1,32 +1,45 @@
+import { DetailFilterService } from './../../../core/services/detail-filter.service';
 import { PageLimitService } from './../../../core/services/page-limit.service';
 import { environment } from './../../../../environments/environment';
 import { IBug } from './../../../core/services/models/api.model';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-sharedlist',
   templateUrl: './sharedlist.component.html',
   styleUrls: ['./sharedlist.component.scss'],
 })
-export class SharedListComponent {
+export class SharedListComponent implements OnInit {
   public bugData?: IBug[];
 
   public currentPage: number = 1;
+  public maxPage: number = 1;
+
   public filter: string = '';
   @Input() public filterByUser: boolean = false;
 
   public defautImg: string = environment.notFoundBug;
 
-  constructor(private pageLimitService: PageLimitService) {}
+  constructor(
+    private detailFilterService: DetailFilterService,
+    private pageLimitService: PageLimitService
+  ) {}
 
-  public onPageChange(deltaPage: number): void {
-    if (
-      this.currentPage + deltaPage <= 0 ||
-      this.currentPage + deltaPage > this.pageLimitService.pageLimit
-    ) {
-      return;
+  ngOnInit(): void {
+    if (!this.filterByUser) {
+      this.filter = this.detailFilterService.getfilter;
+      this.detailFilterService.setFilter('');
     }
 
+    this.pageLimitService.pageSubject.subscribe((value) => {
+      this.maxPage = value;
+      if (this.currentPage > this.maxPage) {
+        this.currentPage = Math.max(1, this.maxPage);
+      }
+    });
+  }
+
+  public onPageChange(deltaPage: number): void {
     this.currentPage += deltaPage;
   }
 

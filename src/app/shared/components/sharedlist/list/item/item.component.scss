@@ -4,14 +4,13 @@
 .bug-list__item {
   position: relative;
 
-  height: 5rem;
-  width: 14rem;
+  height: 6rem;
+  width: 16rem;
 
   list-style: none;
 
   padding: 0.5rem;
   border-radius: $default-border-radius;
-
 
   display: flex;
   justify-content: flex-start;
@@ -31,7 +30,7 @@
 
   .image-container {
     height: 100%;
-    width:5rem;
+    width: 5rem;
 
     display: flex;
     justify-content: center;
@@ -40,11 +39,18 @@
     overflow: hidden;
     border-radius: $default-border-radius;
 
-    @include not-mobile{
+    @include not-mobile {
       width: 50%;
     }
     .image {
-      height: 100%;
+      object-fit: cover;
+      max-width: 300%;
+      max-height: 200%;
+
+      &:hover {
+        transition: 500ms;
+        transform: rotate(5deg);
+      }
     }
   }
 
@@ -66,8 +72,5 @@
     top: 1rem;
     right: 1rem;
     display: block;
-  }
-
-  &--owned {
   }
 }

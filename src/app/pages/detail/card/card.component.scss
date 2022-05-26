@@ -1,20 +1,45 @@
+@import "/src/styles/variables";
+@import "/src/styles/mixins";
+
 .detail {
   width: 75vw;
   position: relative;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include not-mobile {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
   &__image-container {
     width: 100%;
+    @include not-mobile {
+      width: 50%;
+    }
 
     img {
       display: block;
       max-height: 100%;
       max-width: 100%;
-      margin: auto;
+
+      border-radius: 1rem;
     }
   }
 
   &__data {
     width: 100%;
+    @include not-mobile {
+      width: 50%;
+    }
+    p {
+      margin-bottom: 0.5rem;
+    }
 
     .name {
       font-size: 2rem;
