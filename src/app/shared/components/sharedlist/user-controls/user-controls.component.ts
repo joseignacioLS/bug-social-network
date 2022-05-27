@@ -1,4 +1,4 @@
-import { PageLimitService } from './../../../../core/services/page-limit.service';
+import { ListControlsService } from './../../../../core/services/list-controls.service';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
@@ -7,28 +7,38 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
   styleUrls: ['./user-controls.component.scss'],
 })
 export class UserControlsComponent implements OnInit {
-  @Input() public filter: string = '';
-  @Input() public currentPage: number = 1;
+  public filter: string = '';
+  public currentPage: number = 1;
+  public lastPage: boolean = false;
+  @Input() public filterByUser: boolean = false;
 
-  @Input () public maxPage: number = 1;
-
-  @Output() public clickEmmitter: EventEmitter<number> = new EventEmitter();
-  @Output() public filterEmmiter: EventEmitter<string> = new EventEmitter();
-
-  constructor(private pageLimitService: PageLimitService) {}
+  constructor(
+    private listControlsService: ListControlsService
+  ) {}
 
   ngOnInit(): void {
-    this.pageLimitService.pageSubject.subscribe(
-      (value) => (this.maxPage = value)
+    if (!this.filterByUser) {
+      this.filter = this.listControlsService.getFilter;
+      this.listControlsService.setFilter('');
+    }
+
+    this.listControlsService.lastPageSubject.subscribe(
+      (value) => (this.lastPage = value)
+    );
+    this.listControlsService.currentPageSubject.subscribe(
+      (value) => (this.currentPage = value)
+    );
+    this.listControlsService.filterSubject.subscribe(
+      (value) => (this.filter = value)
     );
   }
 
   public onClick(deltaPage: number) {
-    this.clickEmmitter.emit(deltaPage);
+    this.listControlsService.setCurrentPage(this.currentPage + deltaPage);
   }
 
   public onInput() {
-    this.filterEmmiter.emit(this.filter);
+    this.listControlsService.setFilter(this.filter);
   }
 
   public onResetFilter() {

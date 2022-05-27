@@ -1,6 +1,6 @@
 import { UserTrackerService } from './user-tracker.service';
 import { environment } from './../../../environments/environment';
-import { IBug, INewBug } from './models/api.model';
+import { IBug, INewBug, IArrayBugs } from './models/api.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
@@ -18,8 +18,8 @@ export class ApiService {
    * Makes a get call to the api to obtain all the bug objects
    * @returns an array with all the bug objects in the DB
    */
-  public getBug(): Observable<IBug[]> {
-    return this.http.get<IBug[]>(`${environment.apiUrl}/bugs`);
+  public getBug(filter: string = "", page: number = 0): Observable<IArrayBugs> {
+    return this.http.get<IArrayBugs>(`${environment.apiUrl}/bugs?filter=${filter}&page=${page}`);
   }
 
   /**

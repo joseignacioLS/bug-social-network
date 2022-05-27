@@ -1,15 +1,3 @@
-<app-user-controls
-  [currentPage]="currentPage"
-  [maxPage]="maxPage"
-  (clickEmmitter)="onPageChange($event)"
-  (filterEmmiter)="onFilterUpdate($event)"
-  [filter]="filter"
-></app-user-controls>
+<app-user-controls [filterByUser]="filterByUser"></app-user-controls>
 
-<app-list
-  [bugData]="bugData"
-  [filter]="filter"
-  [currentPage]="currentPage"
-  [filterByUser]="filterByUser"
-  (filterEmitter)="onFilterUpdate($event)"
-></app-list>
+<app-list [filterByUser]="filterByUser"></app-list>

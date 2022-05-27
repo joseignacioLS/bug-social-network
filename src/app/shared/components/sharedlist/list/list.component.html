@@ -1,6 +1,6 @@
 <section *ngIf="bugData" class="bug-list">
   <app-item
-    *ngFor="let bug of bugData | nameFilter: filter | paginator: currentPage"
-    [bug]="bug" (filterEmitter)="onFilterReceive($event)"
+    *ngFor="let bug of bugData"
+    [bug]="bug"
   ></app-item>
 </section>

@@ -1,3 +1,4 @@
+import { ListControlsService } from './services/list-controls.service';
 import { ButtonModule } from './../shared/button/button.module';
 import { DetailFilterService } from './services/detail-filter.service';
 import { PageLimitService } from './services/page-limit.service';
@@ -15,7 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 @NgModule({
   declarations: [HeaderComponent],
   imports: [CommonModule, RouterModule, HttpClientModule, ButtonModule],
-  providers: [UserTrackerService, AuthUserGuard, ExitGuardGuard, PageLimitService, DetailFilterService],
+  providers: [UserTrackerService, AuthUserGuard, ExitGuardGuard, PageLimitService, DetailFilterService, ListControlsService],
   exports: [HeaderComponent],
 })
 export class CoreModule {}

@@ -18,3 +18,8 @@ export interface INewBug {
   location?: string
   tags?: string
 }
+
+export interface IArrayBugs {
+  data: IBug[]
+  isLast: boolean
+}

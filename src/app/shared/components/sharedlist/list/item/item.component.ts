@@ -1,3 +1,4 @@
+import { ListControlsService } from './../../../../../core/services/list-controls.service';
 import { environment } from './../../../../../../environments/environment';
 import { UserTrackerService } from './../../../../../core/services/user-tracker.service';
 import { IBug } from './../../../../../core/services/models/api.model';
@@ -15,7 +16,8 @@ export class ItemComponent implements OnInit {
   public isOwned: boolean = false;
 
   constructor(
-    private userTracker: UserTrackerService
+    private userTracker: UserTrackerService,
+    private listControlsServices: ListControlsService
     ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,6 @@ export class ItemComponent implements OnInit {
   }
 
   public onFilterClick(filter: string) {
-    this.filterEmitter.emit(filter);
+    this.listControlsServices.setFilter(filter);
   }
 }
