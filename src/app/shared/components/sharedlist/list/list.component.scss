@@ -1,5 +1,18 @@
 @import "src/styles/mixins";
 
+.load-placeholder {
+  margin-top:4rem;
+  font-size: 4rem;
+  text-align: center;
+  animation: jump 500ms infinite;
+}
+
+@keyframes jump {
+  50% {
+    transform:translateY(-10%)
+  }
+}
+
 .bug-list {
   display: flex;
   flex-direction: column;

@@ -1,4 +1,5 @@
-<section *ngIf="bugData" class="bug-list">
+<div *ngIf="loading" class="load-placeholder">🐞</div>
+<section *ngIf="bugData && !loading" class="bug-list">
   <app-item
     *ngFor="let bug of bugData"
     [bug]="bug"

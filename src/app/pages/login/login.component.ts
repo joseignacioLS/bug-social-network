@@ -47,10 +47,12 @@ export class LoginComponent {
 
       if (this.mode === 'login') {
         this.onLogin(username, password);
+        this.setErrorMessage('Loggin in...');
       }
 
       if (this.mode === 'register') {
         this.onRegister(username, password);
+        this.setErrorMessage('Registering...');
       }
     }
   }

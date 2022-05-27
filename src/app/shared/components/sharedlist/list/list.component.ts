@@ -2,7 +2,8 @@ import { ListControlsService } from './../../../../core/services/list-controls.s
 import { UserTrackerService } from './../../../../core/services/user-tracker.service';
 import { ApiService } from './../../../../core/services/api.service';
 import { IBug, IArrayBugs } from './../../../../core/services/models/api.model';
-import { Component,  Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -15,8 +16,12 @@ export class ListComponent implements OnInit {
 
   public filter: string = '';
   public currentPage: number = 1;
-
   public lastPage: boolean = false;
+
+  public loading: boolean = true;
+
+  private filterSubscritiption? : Subscription;
+  private currentPageSubscritiption? : Subscription;
 
   constructor(
     private api: ApiService,
@@ -25,13 +30,14 @@ export class ListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.filter = this.listControlsService.getFilter
     this.updateData();
 
-    this.listControlsService.filterSubject.subscribe((value) => {
+    this.filterSubscritiption = this.listControlsService.filterSubject.subscribe((value) => {
       this.filter = value;
       this.updateData();
     });
-    this.listControlsService.currentPageSubject.subscribe((value) => {
+    this.currentPageSubscritiption = this.listControlsService.currentPageSubject.subscribe((value) => {
       if (value === this.currentPage) return;
       this.currentPage = value;
       this.updateData();
@@ -39,9 +45,11 @@ export class ListComponent implements OnInit {
   }
 
   public updateData() {
+    this.loading = true;
     this.api
       .getBug(this.filter, this.currentPage - 1)
       .subscribe((data: IArrayBugs) => {
+        this.loading = false;
         this.listControlsService.setLastPage(data.isLast);
         if (data.data.length === 0 && this.currentPage > 1) {
           this.listControlsService.setCurrentPage(this.currentPage - 1);
@@ -54,5 +62,10 @@ export class ListComponent implements OnInit {
           );
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.filterSubscritiption?.unsubscribe()
+    this.currentPageSubscritiption?.unsubscribe()
   }
 }
