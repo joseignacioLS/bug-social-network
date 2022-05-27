@@ -20,8 +20,9 @@ export class ListComponent implements OnInit {
 
   public loading: boolean = true;
 
-  private filterSubscritiption? : Subscription;
-  private currentPageSubscritiption? : Subscription;
+  private filterSubscritiption?: Subscription;
+  private currentPageSubscritiption?: Subscription;
+  private loadingSubscritiption?: Subscription;
 
   constructor(
     private api: ApiService,
@@ -30,42 +31,45 @@ export class ListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filter = this.listControlsService.getFilter
+    this.filter = this.listControlsService.getFilter;
     this.updateData();
 
-    this.filterSubscritiption = this.listControlsService.filterSubject.subscribe((value) => {
-      this.filter = value;
-      this.updateData();
-    });
-    this.currentPageSubscritiption = this.listControlsService.currentPageSubject.subscribe((value) => {
-      if (value === this.currentPage) return;
-      this.currentPage = value;
-      this.updateData();
-    });
+    this.filterSubscritiption =
+      this.listControlsService.filterSubject.subscribe((value) => {
+        this.filter = value;
+        this.updateData();
+      });
+    this.loadingSubscritiption =
+      this.listControlsService.loadingSubject.subscribe((value) => {
+        this.loading = value;
+      });
+    this.currentPageSubscritiption =
+      this.listControlsService.currentPageSubject.subscribe((value) => {
+        if (value === this.currentPage) return;
+        this.currentPage = value;
+        this.updateData();
+      });
   }
 
   public updateData() {
-    this.loading = true;
+    this.listControlsService.setLoading(true);
+
     this.api
-      .getBug(this.filter, this.currentPage - 1)
+      .getBug(this.filter, this.currentPage - 1, this.filterByUser)
       .subscribe((data: IArrayBugs) => {
-        this.loading = false;
+        this.listControlsService.setLoading(false);
         this.listControlsService.setLastPage(data.isLast);
         if (data.data.length === 0 && this.currentPage > 1) {
           this.listControlsService.setCurrentPage(this.currentPage - 1);
         } else {
-          this.bugData = data.data.filter((b) =>
-            this.filterByUser
-              ? this.userTracker.getUser() !== null &&
-                b.user === this.userTracker.getUser()?.username
-              : true
-          );
+          this.bugData = [...data.data];
         }
       });
   }
 
   ngOnDestroy() {
-    this.filterSubscritiption?.unsubscribe()
-    this.currentPageSubscritiption?.unsubscribe()
+    this.filterSubscritiption?.unsubscribe();
+    this.currentPageSubscritiption?.unsubscribe();
+    this.loadingSubscritiption?.unsubscribe();
   }
 }

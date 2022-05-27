@@ -18,8 +18,17 @@ export class ApiService {
    * Makes a get call to the api to obtain all the bug objects
    * @returns an array with all the bug objects in the DB
    */
-  public getBug(filter: string = "", page: number = 0): Observable<IArrayBugs> {
-    return this.http.get<IArrayBugs>(`${environment.apiUrl}/bugs?filter=${filter}&page=${page}`);
+  public getBug(
+    filter: string = '',
+    page: number = 0,
+    isUser: boolean = false
+  ): Observable<IArrayBugs> {
+    const userData = this.userTracker.getUser();
+    return this.http.get<IArrayBugs>(
+      `${environment.apiUrl}/bugs?filter=${filter}&page=${page}${
+        isUser ? '&user=' + userData?.username : ''
+      }`
+    );
   }
 
   /**
@@ -68,7 +77,7 @@ export class ApiService {
       switchMap((oldData) => {
         return this.http.put<IBug>(`${environment.apiUrl}/bugs/${id}`, {
           ...oldData,
-          ...newData
+          ...newData,
         });
       })
     );

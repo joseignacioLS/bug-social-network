@@ -22,6 +22,10 @@ strong {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 // GLOBALS
 
 button {
@@ -29,7 +33,7 @@ button {
 }
 
 .tag-list {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   &__item {
     margin: 0 0.1rem;
@@ -41,7 +45,6 @@ button {
     cursor: pointer;
   }
 }
-
 
 .new-bug {
   position: fixed;

@@ -1,10 +1,19 @@
 .user-control {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  padding: 1rem;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  background-color: white;
+
   &__pages {
     margin-bottom: 1rem;
 
@@ -21,7 +30,7 @@
   }
 
   &__filter {
-    display:flex;
-    gap:.5rem;
+    display: flex;
+    gap: 0.5rem;
   }
 }

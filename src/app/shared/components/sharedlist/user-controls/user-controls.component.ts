@@ -16,6 +16,9 @@ export class UserControlsComponent implements OnInit {
   private filterSubscritiption? : Subscription;
   private lastPageSubscritiption? : Subscription;
   private currentPageSubscritiption? : Subscription;
+  private loadingSubscritiption? : Subscription;
+
+  public loading: boolean = false;
 
   constructor(private listControlsService: ListControlsService) {}
 
@@ -29,6 +32,9 @@ export class UserControlsComponent implements OnInit {
     );
     this.filterSubscritiption = this.listControlsService.filterSubject.subscribe(
       (value) => (this.filter = value)
+    );
+    this.loadingSubscritiption = this.listControlsService.loadingSubject.subscribe(
+      (value) => (this.loading = value)
     );
   }
 
@@ -50,5 +56,6 @@ export class UserControlsComponent implements OnInit {
     this.filterSubscritiption?.unsubscribe()
     this.currentPageSubscritiption?.unsubscribe()
     this.lastPageSubscritiption?.unsubscribe()
+    this.loadingSubscritiption?.unsubscribe()
   }
 }
