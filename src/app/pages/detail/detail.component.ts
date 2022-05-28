@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent implements OnInit {
-  public bug?: Observable<IBug>;
+  public bug$?: Observable<IBug>;
 
   private id: string = '0';
 
@@ -28,13 +28,13 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.updatePageInfo();
-    this.bug?.subscribe((bug: IBug) => {
+    this.bug$?.subscribe((bug: IBug) => {
       this.canEdit = bug.user === this.userTracker.getUser()?.username;
     });
   }
 
   public updatePageInfo() {
-    this.bug = this.route.params.pipe(
+    this.bug$ = this.route.params.pipe(
       switchMap((params) => {
         this.id = params['id'];
         return this.api.getBugById(this.id);
@@ -47,7 +47,7 @@ export class DetailComponent implements OnInit {
   }
 
   public onDelete(): void {
-    if (this.bug) {
+    if (this.bug$) {
       this.api.deleteBug(this.id).subscribe((e) => {
         this.router.navigateByUrl('/mycreations');
       });

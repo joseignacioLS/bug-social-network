@@ -11,7 +11,7 @@ export class ButtonComponent {
   @Input() public text: string = '';
   @Input() public isDisabled: boolean = false;
 
-  @Output() clicked: EventEmitter<any> = new EventEmitter();
+  @Output() clicked: EventEmitter<void> = new EventEmitter();
 
   constructor() {}
 
