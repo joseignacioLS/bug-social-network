@@ -12,30 +12,33 @@ export class UserControlsComponent implements OnInit {
   public currentPage: number = 1;
   public lastPage: boolean = false;
 
-  
-  private filterSubscritiption? : Subscription;
-  private lastPageSubscritiption? : Subscription;
-  private currentPageSubscritiption? : Subscription;
-  private loadingSubscritiption? : Subscription;
+  private filterSubscritiption?: Subscription;
+  private lastPageSubscritiption?: Subscription;
+  private currentPageSubscritiption?: Subscription;
+  private loadingSubscritiption?: Subscription;
 
   public loading: boolean = false;
 
   constructor(private listControlsService: ListControlsService) {}
 
   ngOnInit(): void {
-    this.filter = this.listControlsService.getFilter
-    this.lastPageSubscritiption = this.listControlsService.lastPageSubject.subscribe(
-      (value) => (this.lastPage = value)
-    );
-    this.currentPageSubscritiption =  this.listControlsService.currentPageSubject.subscribe(
-      (value) => (this.currentPage = value)
-    );
-    this.filterSubscritiption = this.listControlsService.filterSubject.subscribe(
-      (value) => (this.filter = value)
-    );
-    this.loadingSubscritiption = this.listControlsService.loadingSubject.subscribe(
-      (value) => (this.loading = value)
-    );
+    this.filter = this.listControlsService.getFilter;
+    this.lastPageSubscritiption =
+      this.listControlsService.lastPageSubject.subscribe(
+        (value) => (this.lastPage = value)
+      );
+    this.currentPageSubscritiption =
+      this.listControlsService.currentPageSubject.subscribe(
+        (value) => (this.currentPage = value)
+      );
+    this.filterSubscritiption =
+      this.listControlsService.filterSubject.subscribe(
+        (value) => (this.filter = value)
+      );
+    this.loadingSubscritiption =
+      this.listControlsService.loadingSubject.subscribe(
+        (value) => (this.loading = value)
+      );
   }
 
   public onClick(deltaPage: number) {
@@ -51,11 +54,12 @@ export class UserControlsComponent implements OnInit {
     this.onInput();
   }
 
-  
   ngOnDestroy() {
-    this.filterSubscritiption?.unsubscribe()
-    this.currentPageSubscritiption?.unsubscribe()
-    this.lastPageSubscritiption?.unsubscribe()
-    this.loadingSubscritiption?.unsubscribe()
+    this.filterSubscritiption?.unsubscribe();
+    this.currentPageSubscritiption?.unsubscribe();
+    this.lastPageSubscritiption?.unsubscribe();
+    this.loadingSubscritiption?.unsubscribe();
+
+    this.listControlsService.setFilter('');
   }
 }

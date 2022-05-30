@@ -1,9 +1,9 @@
 import { UserTrackerService } from './user-tracker.service';
 import { environment } from './../../../environments/environment';
-import { IBug, INewBug, IArrayBugs } from './models/api.model';
+import { IBug, IArrayBugs } from './models/api.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -45,24 +45,8 @@ export class ApiService {
    * @param data bug data
    * @returns the generated bug object
    */
-  public createBug(data: INewBug) {
-    // sacar todo esto a otra funcion
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-
-    const user = this.userTracker.getUser()?.username;
-
-    const username = user ?? '';
-
-    const newBug: INewBug = {
-      ...data,
-      user: username,
-      createdAt: `${year}-${month}-${day}`,
-    };
-
-    return this.http.post<IBug>(`${environment.apiUrl}/bugs`, newBug);
+  public createBug(data: FormData) {
+    return this.http.post<IBug>(`${environment.apiUrl}/bugs`, data);
   }
 
   /**
@@ -72,15 +56,8 @@ export class ApiService {
    * @returns the modified bug object
    */
 
-  public modifyBug(id: string, newData: INewBug) {
-    return this.getBugById(id).pipe(
-      switchMap((oldData) => {
-        return this.http.put<IBug>(`${environment.apiUrl}/bugs/${id}`, {
-          ...oldData,
-          ...newData,
-        });
-      })
-    );
+  public modifyBug(id: string, data: object) {
+    return this.http.put<IBug>(`${environment.apiUrl}/bugs/${id}`, data);
   }
 
   /**
