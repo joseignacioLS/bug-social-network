@@ -46,7 +46,6 @@ export class BugFormComponent implements OnInit {
         ]),
       });
     } else {
-      console.log('this!');
       this.newBugForm = this.formBuilder.group({
         name: new FormControl('', [
           Validators.required,
@@ -61,15 +60,15 @@ export class BugFormComponent implements OnInit {
           Validators.pattern(/^[A-Za-z\-]{3,12}(?:,[A-Za-z\-]{3,12})*$/),
         ]),
       });
-    }
 
-    if (this.mode === 'edit' && this.bug) {
-      this.newBugForm.patchValue({
-        name: this.bug.name,
-        description: this.bug.description,
-        location: this.bug.location,
-        tags: this.bug.tags,
-      });
+      if (this.bug) {
+        this.newBugForm.patchValue({
+          name: this.bug.name,
+          description: this.bug.description,
+          location: this.bug.location,
+          tags: this.bug.tags,
+        });
+      }
     }
   }
 
@@ -91,7 +90,10 @@ export class BugFormComponent implements OnInit {
         data.append('tags', this.newBugForm.value.tags);
         data.append('user', username);
         data.append('createdAt', `${year}-${month}-${day}`);
-        data.append('image', this.newBugForm.value.image ? this.newBugForm.value.image : '');
+        data.append(
+          'image',
+          this.newBugForm.value.image ? this.newBugForm.value.image : ''
+        );
 
         this.api.createBug(data).subscribe((e) => {
           this.router.navigateByUrl('/mycreations');
