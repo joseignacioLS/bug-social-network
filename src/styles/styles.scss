@@ -22,7 +22,7 @@ strong {
   padding: 0;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
 }
 
@@ -48,6 +48,6 @@ button {
 
 .new-bug {
   position: fixed;
-  bottom: 1rem;
+  bottom: $bottom-margin;
   right: 1rem;
 }
