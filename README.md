@@ -18,3 +18,5 @@ This is a fake social-network-like webpage for bug (insect) lovers. The project 
  - Shared components
  - Reactive forms
  - Login guards
+ - JWT security
+ - Responsive
