@@ -19,7 +19,12 @@ export class UserTrackerService {
    */
   public getUser(): IUser | null {
     const item: string | null = localStorage.getItem('user');
-    if (item !== null) return JSON.parse(item) as IUser;
+    if (item !== null) {
+      this.isLogged$.next(true);
+      return JSON.parse(item) as IUser;
+    }
+
+    this.isLogged$.next(false);
     return item;
   }
 
