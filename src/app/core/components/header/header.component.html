@@ -9,11 +9,11 @@
 
     <div class="user-options">
       <!-- Login Button for not logged users -->
-      <div *ngIf="!isLogged()" class="user-options__not-logged">
+      <div *ngIf="!isLogged" class="user-options__not-logged">
         <a [routerLink]="['/login']">Login</a>
       </div>
       <!-- Expandable menu for logged users -->
-      <div *ngIf="isLogged()" class="user-options__logged">
+      <div *ngIf="isLogged" class="user-options__logged">
         <app-button
           [text]="isMenuVisible ? '>' : '<'"
           (clicked)="onToggleMenu()"

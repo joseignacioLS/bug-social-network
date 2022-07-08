@@ -48,6 +48,7 @@ export class UserTrackerService {
           // if the login is successfull, the data is stored
           // in the localstorage and the user is redirected
           localStorage.setItem('user', JSON.stringify(res.data));
+          this.isLogged$.next(true);
         })
       );
   }
@@ -77,5 +78,6 @@ export class UserTrackerService {
    */
   public logout(): void {
     localStorage.removeItem('user');
+    this.isLogged$.next(false);
   }
 }

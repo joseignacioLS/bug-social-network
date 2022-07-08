@@ -1,16 +1,23 @@
 import { NavigationEnd, Router } from '@angular/router';
 import { UserTrackerService } from './../../services/user-tracker.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   public isMenuVisible: boolean = false;
+  private userSubscription?: Subscription;
+  public isLogged: boolean = false;
 
-  constructor(private userTracker: UserTrackerService, private router: Router) {
+  constructor(
+    private userTracker: UserTrackerService,
+    private router: Router,
+    private userTrackerService: UserTrackerService
+  ) {
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.isMenuVisible = false;
@@ -18,8 +25,10 @@ export class HeaderComponent {
     });
   }
 
-  public isLogged() {
-    return this.userTracker.getUser() !== null;
+  ngOnInit(): void {
+    this.userSubscription = this.userTrackerService.isLogged$.subscribe((value) => {
+      this.isLogged = value;
+    });
   }
 
   public logout() {
